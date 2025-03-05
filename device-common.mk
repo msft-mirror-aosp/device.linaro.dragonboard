@@ -39,7 +39,7 @@ else
   BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(filter-out $(BOARD_VENDOR_KERNEL_MODULES),$(TARGET_MODS))
 endif
 
-PRODUCT_SHIPPING_API_LEVEL := 34
+PRODUCT_SHIPPING_API_LEVEL := 35
 
 # Check vendor package version
 # If you need to make changes to the vendor partition,
