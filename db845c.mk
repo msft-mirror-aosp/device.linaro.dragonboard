@@ -38,6 +38,9 @@ else
   TARGET_USES_LMP := false
 endif
 
+#Use Generic Power and Thermal HAL from libpm project
+TARGET_USES_LIBPM ?= false
+
 # Product overrides
 PRODUCT_NAME := db845c
 PRODUCT_DEVICE := db845c
