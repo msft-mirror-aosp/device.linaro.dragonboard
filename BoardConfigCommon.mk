@@ -45,7 +45,8 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_WLAN_DEVICE := qcwcn
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+# Use full namespace path for BOARD_HOSTAPD_PRIVATE_LIB due to its own namespace
+BOARD_HOSTAPD_PRIVATE_LIB := //hardware/qcom/wlan/wcn6740/qcwcn/wpa_supplicant_8_lib:lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
