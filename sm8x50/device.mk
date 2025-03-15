@@ -71,6 +71,12 @@ PRODUCT_COPY_FILES += \
 # Copy firmware files
 $(call inherit-product-if-exists, vendor/linaro/sm8x50/$(EXPECTED_LINARO_VENDOR_VERSION)/device.mk)
 
+# Power and Thermal HAL
+PRODUCT_PACKAGES += \
+    android.hardware.power-service.example \
+    android.hardware.power.stats-service.example \
+    com.android.hardware.thermal
+
 TARGET_HARDWARE := sm8x50
 TARGET_KERNEL_USE ?= 6.12
 
