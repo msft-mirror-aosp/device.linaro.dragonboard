@@ -70,19 +70,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
 
-#
-# Power HAL
-#
-PRODUCT_PACKAGES += \
-    android.hardware.power-service.example
-
-#
-# PowerStats HAL
-#
-PRODUCT_PACKAGES += \
-    android.hardware.power.stats-service.example
-
-
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio.service \
@@ -169,9 +156,6 @@ PRODUCT_PACKAGES += \
 
 # Health HAL
 PRODUCT_PACKAGES += com.google.cf.health
-
-# Thermal HAL
-PRODUCT_PACKAGES += com.android.hardware.thermal
 
 # TODO: disable this service once we implement system suspend
 PRODUCT_PACKAGES += \

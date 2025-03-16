@@ -63,7 +63,8 @@ endif
 
 PRODUCT_SOONG_NAMESPACES += \
     device/linaro/dragonboard \
-    vendor/linaro/shared/$(EXPECTED_LINARO_VENDOR_VERSION)/linux-firmware
+    vendor/linaro/shared/$(EXPECTED_LINARO_VENDOR_VERSION)/linux-firmware \
+    vendor/linaro/shared/$(EXPECTED_LINARO_VENDOR_VERSION)/external/libpm
 
 # Dynamic partitions
 PRODUCT_BUILD_SUPER_PARTITION := true

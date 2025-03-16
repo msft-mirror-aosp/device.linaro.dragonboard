@@ -6,6 +6,7 @@
 HW=`/vendor/bin/cat /proc/device-tree/compatible | /vendor/bin/grep db845c`
 if [ -n "${HW}" ]; then
     setprop vendor.hw db845c
+    setprop vendor.thermal.config thermal-db845c.json
     exit 0
 fi
 
