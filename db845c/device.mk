@@ -65,6 +65,16 @@ PRODUCT_SOONG_NAMESPACES += \
 $(call inherit-product-if-exists, vendor/linaro/db845c/$(EXPECTED_LINARO_VENDOR_VERSION)/device.mk)
 $(call inherit-product-if-exists, vendor/linaro/rb5/$(EXPECTED_LINARO_VENDOR_VERSION)/device.mk)
 
+# Power and Thermal HAL
+ifeq ($(TARGET_USES_LIBPM), true)
+$(call inherit-product, vendor/linaro/shared/$(EXPECTED_LINARO_VENDOR_VERSION)/external/libpm/device.mk)
+else
+PRODUCT_PACKAGES += \
+    android.hardware.power-service.example \
+    android.hardware.power.stats-service.example \
+    com.android.hardware.thermal
+endif
+
 TARGET_HARDWARE := db845c
 TARGET_KERNEL_USE ?= 6.12
 
