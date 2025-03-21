@@ -20,13 +20,13 @@ TARGET_MODS := $(wildcard $(TARGET_KERNEL_DIR)/*.ko)
 BOARD_DO_NOT_STRIP_VENDOR_RAMDISK_MODULES := true
 BOARD_DO_NOT_STRIP_GENERIC_RAMDISK_MODULES := true
 ifeq ($(TARGET_SDCARD_BOOT), true)
-  # Do not copy UFS kernel module in vendor_dlkm.img
+  # Copy UFS driver module in vendor_dlkm
   # UFS module filename varies from ufs_qcom.ko to ufs-qcom.ko across different kernel versions
-  UFS_MODULE := $(wildcard $(TARGET_KERNEL_DIR)/ufs*qcom.ko)
+  BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(TARGET_KERNEL_DIR)/ufs*qcom.ko)
 ifeq ($(TARGET_USES_GBL), true)
-  BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(filter-out $(UFS_MODULE),$(TARGET_MODS))
+  BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(filter-out $(BOARD_VENDOR_KERNEL_MODULES),$(TARGET_MODS))
 else
-  BOARD_GENERIC_RAMDISK_KERNEL_MODULES := $(filter-out $(UFS_MODULE),$(TARGET_MODS))
+  BOARD_GENERIC_RAMDISK_KERNEL_MODULES := $(filter-out $(BOARD_VENDOR_KERNEL_MODULES),$(TARGET_MODS))
 endif
 else ifeq ($(TARGET_USES_LMP), true)
     include device/linaro/dragonboard/shared/utils/dlkm_loader/vendor.modules.list.mk
