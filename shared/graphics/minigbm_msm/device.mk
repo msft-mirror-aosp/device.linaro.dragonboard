@@ -14,13 +14,15 @@
 # limitations under the License.
 #
 
+# which will be used by the minigbm allocator compilation
+$(call soong_config_set,minigbm,platform,msm)
+
 PRODUCT_PACKAGES := \
-    gralloc.minigbm_msm \
-    android.hardware.graphics.allocator@4.0-service.minigbm_msm \
-    android.hardware.graphics.mapper@4.0-impl.minigbm_msm
+    android.hardware.graphics.allocator-service.minigbm \
+    android.hardware.graphics.mapper@4.0-impl.minigbm
 
 PRODUCT_PROPERTY_OVERRIDES := \
-    ro.hardware.gralloc=minigbm_msm
+    ro.hardware.gralloc=minigbm
 
 ifeq ($(TARGET_USES_SWR), true)
 PRODUCT_VENDOR_PROPERTIES := \
