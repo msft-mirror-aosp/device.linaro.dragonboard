@@ -27,7 +27,11 @@ BOARD_KERNEL_CMDLINE += androidboot.slot_suffix=_a
 ifeq ($(TARGET_SDCARD_BOOT), true)
 BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc@0/8804000.mmc
 else
+ifeq ($(TARGET_KERNEL_USE), mainline)
+BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc@0/1d84000.ufshc
+else
 BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc@0/1d84000.ufs
+endif
 endif
 endif
 
