@@ -30,9 +30,8 @@ PRODUCT_PACKAGES += audio.primary.sm8x50
 
 # BootControl HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-impl \
-    android.hardware.boot@1.2-impl.recovery \
-    android.hardware.boot@1.2-service
+    com.android.hardware.boot \
+    android.hardware.boot-service.default_recovery
 
 # Set BT address
 PRODUCT_PACKAGES += bdaddr
