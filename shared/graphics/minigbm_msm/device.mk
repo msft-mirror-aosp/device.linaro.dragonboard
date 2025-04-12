@@ -19,7 +19,7 @@ $(call soong_config_set,minigbm,platform,msm)
 
 PRODUCT_PACKAGES := \
     android.hardware.graphics.allocator-service.minigbm \
-    android.hardware.graphics.mapper@4.0-impl.minigbm
+    mapper.minigbm
 
 PRODUCT_PROPERTY_OVERRIDES := \
     ro.hardware.gralloc=minigbm
