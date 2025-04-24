@@ -17,7 +17,7 @@ then
 SERIALNO=`/vendor/bin/cat /proc/bootconfig | /vendor/bin/grep -o serialno.* |\
 	 /vendor/bin/cut -f2 -d'=' | /vendor/bin/cut -c 3-10 |\
 	 /vendor/bin/awk '{printf("02%010s\n", $1)}' |\
-	 /vendor/bin/sed 's/\(..\)/\1:/g' |\ /vendor/bin/sed '$s/:$//'`
+	 /vendor/bin/sed 's/\(..\)/\1:/g' | /vendor/bin/sed '$s/:$//'`
 fi
 
 /vendor/bin/ifconfig eth0 down
