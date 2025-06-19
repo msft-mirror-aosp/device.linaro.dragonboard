@@ -45,6 +45,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += Launcher3QuickStep
 
 # Enable WiFi
+FORCE_USE_ANDROIDMK_FOR_WPA_CONF := true
 PRODUCT_PACKAGES += \
     hostapd \
     libwpa_client \
