@@ -15,6 +15,13 @@
 #
 
 TARGET_KERNEL_DIR ?= device/linaro/dragonboard-kernel/android-$(TARGET_KERNEL_USE)
+ifeq ($(TARGET_BOOTS_16K), true)
+  ifeq ($(wildcard $(TARGET_KERNEL_DIR)/16k/),)
+    $(error 16k page size builds are not supported by your kernel version)
+  else
+    TARGET_KERNEL_DIR := $(TARGET_KERNEL_DIR)/16k/
+  endif
+endif
 TARGET_MODS := $(wildcard $(TARGET_KERNEL_DIR)/*.ko)
 
 BOARD_DO_NOT_STRIP_VENDOR_RAMDISK_MODULES := true
@@ -39,7 +46,7 @@ else
   BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(filter-out $(BOARD_VENDOR_KERNEL_MODULES),$(TARGET_MODS))
 endif
 
-PRODUCT_SHIPPING_API_LEVEL := 34
+PRODUCT_SHIPPING_API_LEVEL := 36
 
 # Check vendor package version
 # If you need to make changes to the vendor partition,
