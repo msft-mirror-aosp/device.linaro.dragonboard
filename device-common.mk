@@ -26,8 +26,33 @@ TARGET_MODS := $(wildcard $(TARGET_KERNEL_DIR)/*.ko)
 
 BOARD_DO_NOT_STRIP_VENDOR_RAMDISK_MODULES := true
 BOARD_DO_NOT_STRIP_GENERIC_RAMDISK_MODULES := true
-# Copy Ath12k (WiFi on sm8x50) driver module in vendor_dlkm
-BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(TARGET_KERNEL_DIR)/ath12k.ko)
+
+# Copy driver modules in system|vendor dlkm to make sure relevant firmware
+# files in /vendor/firmware are available to load at the driver probe time
+
+# WiFi
+BOARD_VENDOR_KERNEL_MODULES := \
+  $(wildcard $(TARGET_KERNEL_DIR)/ath11k.ko) \
+  $(wildcard $(TARGET_KERNEL_DIR)/ath11k_ahb.ko) \
+  $(wildcard $(TARGET_KERNEL_DIR)/ath11k_pci.ko) \
+  $(wildcard $(TARGET_KERNEL_DIR)/ath12k.ko)
+
+# Remoteprocs
+BOARD_VENDOR_KERNEL_MODULES += \
+  $(wildcard $(TARGET_KERNEL_DIR)/smp2p.ko)
+
+# Venus
+BOARD_VENDOR_KERNEL_MODULES += \
+  $(wildcard $(TARGET_KERNEL_DIR)/videocc-sdm845.ko) \
+  $(wildcard $(TARGET_KERNEL_DIR)/videocc-sm8250.ko) \
+  $(wildcard $(TARGET_KERNEL_DIR)/videocc-sm8550.ko)
+
+# Bluetooth
+BOARD_SYSTEM_KERNEL_MODULES := \
+  $(wildcard $(TARGET_KERNEL_DIR)/btqca.ko) \
+  $(wildcard $(TARGET_KERNEL_DIR)/hci_uart.ko) \
+  $(wildcard $(TARGET_KERNEL_DIR)/rfcomm.ko)
+
 ifeq ($(TARGET_SDCARD_BOOT), true)
   # Copy UFS driver module in vendor_dlkm
   # UFS module filename varies from ufs_qcom.ko to ufs-qcom.ko across different kernel versions
@@ -41,9 +66,9 @@ else ifeq ($(TARGET_USES_LMP), true)
     include device/linaro/dragonboard/shared/utils/dlkm_loader/vendor.modules.list.mk
     BOARD_VENDOR_KERNEL_MODULES := $(patsubst %,$(TARGET_KERNEL_DIR)/%,$(VENDOR_DLKM_KERNEL_MODULES_LIST))
     BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(patsubst %,$(TARGET_KERNEL_DIR)/%,$(VENDOR_RAMDISK_KERNEL_MODULES_LIST))
-    BOARD_SYSTEM_KERNEL_MODULES := $(filter-out $(BOARD_VENDOR_KERNEL_MODULES) $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES), $(wildcard $(TARGET_KERNEL_DIR)/*.ko))
+    BOARD_SYSTEM_KERNEL_MODULES += $(filter-out $(BOARD_VENDOR_KERNEL_MODULES) $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES), $(wildcard $(TARGET_KERNEL_DIR)/*.ko))
 else
-  BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(filter-out $(BOARD_VENDOR_KERNEL_MODULES),$(TARGET_MODS))
+  BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(filter-out $(BOARD_VENDOR_KERNEL_MODULES) $(BOARD_SYSTEM_KERNEL_MODULES),$(TARGET_MODS))
 endif
 
 PRODUCT_SHIPPING_API_LEVEL := 36
