@@ -20,9 +20,10 @@ $(SM8X50_DTBS): $(SM8X50_STAGING_DIR)/%.dtb: $(TARGET_KERNEL_DIR)/%.dtb $(SM8X50
 
 DB845C_DTB := $(TARGET_KERNEL_DIR)/sdm845-db845c.dtb
 RB5_DTB := $(wildcard $(TARGET_KERNEL_DIR)/qrb5165-rb5.dtb)
+RB3GEN2_DTB := $(wildcard $(TARGET_KERNEL_DIR)/qcs6490-rb3gen2.dtb)
 
-$(PRODUCT_OUT)/dtb.img: $(SM8X50_DTBS) $(RB5_DTB) $(DB845C_DTB)
-	-cat $(SM8X50_DTBS) $(RB5_DTB) $(DB845C_DTB) > $@
+$(PRODUCT_OUT)/dtb.img: $(SM8X50_DTBS) $(RB5_DTB) $(DB845C_DTB) $(RB3GEN2_DTB)
+	-cat $(RB3GEN2_DTB) $(SM8X50_DTBS) $(RB5_DTB) $(DB845C_DTB) > $@
 
 droidcore: $(PRODUCT_OUT)/dtb.img
 
